@@ -1,0 +1,10 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: dojo_omniauth_development
+  pool: 5
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: dojo_omniauth_test

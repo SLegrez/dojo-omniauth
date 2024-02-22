@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Users</h1>
+
+<div id="users">
+  <% @users.each do |user| %>
+    <div style="border: solid 2px black; display: flex; flex-direction: column; padding: 5px;">
+      <span><b>Email :</b> <%= user.email %></span>
+      <span><b>Prénom :</b> <%= user.first_name %></span>
+      <span><b>Nom :</b> <%= user.last_name %></span>
+      <span><b>Facebook UID :</b> <%= user.facebook_uid %></span>
+      <span><b>Google UID :</b> <%= user.google_uid %></span>
+      <span><b>Linkedin UID :</b> <%= user.linkedin_uid %></span>
+    </div>
+  <% end %>
+</div>
+
+<%= button_to "Déconnexion", signout_path, method: :get, "data-turbo": false, style: "margin-top: 1rem;" %>
