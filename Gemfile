@@ -47,7 +47,7 @@ gem "devise", "~> 4.9.3"
 gem "dry-transaction", "~> 0.15.0"
 gem "omniauth-facebook", "~> 9.0.0"
 gem "omniauth-google-oauth2", "~> 1.1.1"
-gem "omniauth-linkedin-oauth2", "~> 1.0.1"
+gem 'omniauth-linkedin-openid', "~> 1.0.1"
 gem "omniauth-rails_csrf_protection", "~> 1.0.1"
 
 group :development, :test do
