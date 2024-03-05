@@ -6,11 +6,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     launch_omniauth_transaction(__method__.to_s)
   end
 
-  # def google_oauth2
-  #   launch_omniauth_transaction("google")
-  # end
-  def google
-    launch_omniauth_transaction(__method__.to_s)
+  def google_oauth2
+    launch_omniauth_transaction("google")
   end
 
   def linkedin
@@ -35,6 +32,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    redirect_to root_path
+    redirect_to(new_user_registration_path)
   end
 end
