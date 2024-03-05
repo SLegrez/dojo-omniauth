@@ -276,7 +276,10 @@ Devise.setup do |config|
                   info_fields: "email,first_name,last_name"
   config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"],
                   info_fields: "email,first_name,last_name"
-  config.omniauth :linkedin, ENV["LINKEDIN_CLIENT_ID"], ENV["LINKEDIN_CLIENT_SECRET"], scope: "openid profile email"
+  config.omniauth :linkedin, ENV["LINKEDIN_CLIENT_ID"], ENV["LINKEDIN_CLIENT_SECRET"],
+                  scope: "openid profile email"
+  config.omniauth :github, ENV["GITHUB_KEY"], ENV["GITHUB_SECRET"],
+                  scope: "user"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
