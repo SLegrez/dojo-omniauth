@@ -45,6 +45,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 gem "devise", "~> 4.9.3"
 gem "dry-transaction", "~> 0.15.0"
+gem "factory_bot_rails", "~> 6.1"
 gem "omniauth-facebook", "~> 9.0.0"
 gem "omniauth-github", "~> 2.0.0"
 gem "omniauth-google-oauth2", "~> 1.1.1"
@@ -54,13 +55,17 @@ gem "omniauth-rails_csrf_protection", "~> 1.0.1"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
+  gem "rspec-rails", "~> 6.1.1"
+  gem "byebug", "~> 11.1", platforms: [:mri, :mingw, :x64_mingw]
+  gem "pry", "~> 0.14"
+  gem "pry-rails"
+  gem "pry-byebug", "~> 3.10"
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "figaro", "~> 1.2.0"
   gem "web-console"
-
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
