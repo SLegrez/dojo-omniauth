@@ -1,24 +1,27 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Dernière mise à jour : 29/04/24
 
-Things you may want to cover:
+## Mise en place du fast connect Facebook :
+- Créer un compte Facebook Developer « https://developers.facebook.com/ ».
+- Créer une app « mon-app-a-moi ».
+- Paramétrer les autorisations pour avoir l’email ainsi que le public_profile.
+- En développement les redirections « localhost » sont automatiquement autorisées donc pas besoin de whitelister quoi que ce soit.
+- Aller dans « Paramètres de l’app » -> Général. Copier/coller « Identifiant de l’application » et « Clé secrète » qui correspondent respectivement aux var d’env « FACEBOOK_APP_ID » & « FACEBOOK_APP_SECRET » et mettre ça dans notre app.
 
-* Ruby version
+	Pour faire tourner ça en prod il y a d’autres étapes à compléter :
+    - Indiquer une url de redirection Omniauth valide. Par exemple « https://www.mon-app-a-moi.com/users/auth/facebook/callback ».
+    - Renseigner les URL de politique de confidentialité et de suppression des données utilisateurs (ou l’url de rappel).
+    - (Aller dans « Publier » pour voir ce qu’il manque et ensuite dans « Vérification de l’entreprise ». Choisir un comp.te ou en créer un le cas échéant)
 
-* System dependencies
+## Mise en place du fast connect Google :
+- Créer un projet sur « https://console.developers.google.com ».
+- Créer un identifiant ID client Oauth. Valider et copier/coller les « GOOGLE_CLIENT_ID » & « GOOGLE_CLIENT_SECRET ».
+- Ajouter « http://localhost/users/auth/google_oauth2/callback » dans l’url de redirection autorisée de la configuration de l’identifiant.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Mise en place du fast connect Linkedin :
+- Ne pas utiliser l'ancienne gem « omniauth-linkedin-oauth2 » mais « omniauth-linkedin-openid ». L’ancienne qu’on utilise notamment sur Tantiem n’est plus à jour notamment pour aller taper le endpoint de Linkedin qui a changé.
+- Aller sur « https://www.linkedin.com/developers/» et créer une app.
+- Aller dans « Auth » et copier/coller les IDs.
+- Ajouter « http://localhost:3000/users/auth/linkedin/callback » comme url de retour.
+- Activer « Sign In with LinkedIn » dans « Products ».
