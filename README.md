@@ -12,7 +12,7 @@ Dernière mise à jour : 29/04/24
 	Pour faire tourner ça en prod il y a d’autres étapes à compléter :
     - Indiquer une url de redirection Omniauth valide. Par exemple « https://www.mon-app-a-moi.com/users/auth/facebook/callback ».
     - Renseigner les URL de politique de confidentialité et de suppression des données utilisateurs (ou l’url de rappel).
-    - (Aller dans « Publier » pour voir ce qu’il manque et ensuite dans « Vérification de l’entreprise ». Choisir un comp.te ou en créer un le cas échéant)
+    - (Aller dans « Publier » pour voir ce qu’il manque et ensuite dans « Vérification de l’entreprise ». Choisir un compte ou en créer un le cas échéant).
 
 ## Mise en place du fast connect Google :
 - Créer un projet sur « https://console.developers.google.com ».
