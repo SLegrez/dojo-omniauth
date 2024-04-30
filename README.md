@@ -2,6 +2,16 @@
 
 Dernière mise à jour : 29/04/24
 
+## Gem requises :
+- Une gem pour gérer les clés secrètes (ici Figaro)
+- devise
+- dry-transaction
+- omniauth-rails_csrf_protection
+- omniauth-facebook
+- omniauth-google-oauth2
+- omniauth-linkedin-openid
+- Bonus : omniauth-github
+
 ## Mise en place du fast connect Facebook :
 - Créer un compte Facebook Developer « https://developers.facebook.com/ ».
 - Créer une app « mon-app-a-moi ».
@@ -16,7 +26,7 @@ Dernière mise à jour : 29/04/24
 
 ## Mise en place du fast connect Google :
 - Créer un projet sur « https://console.developers.google.com ».
-- Créer un identifiant ID client Oauth. Valider et copier/coller les « GOOGLE_CLIENT_ID » & « GOOGLE_CLIENT_SECRET ».
+- Créer un identifiant en cliquant sur « Créer des identifiants » (en haut) puis « ID client Oauth ». Valider et copier/coller les « GOOGLE_CLIENT_ID » & « GOOGLE_CLIENT_SECRET ».
 - Ajouter « http://localhost/users/auth/google_oauth2/callback » dans l’url de redirection autorisée de la configuration de l’identifiant.
 
 ## Mise en place du fast connect Linkedin :

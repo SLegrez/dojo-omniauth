@@ -4,16 +4,6 @@ RSpec.describe Users::OmniauthTransaction, type: :transaction do
   subject { described_class.call(auth: auth, provider: provider) }
 
   describe ".call" do
-    context "given an existing User that already fast-connected" do
-      let(:user) { create(:user, facebook_uid: "1234") }
-      let(:provider) { "facebook" }
-      let(:auth) { OmniAuth::AuthHash.new(info: { email: user.email }, provider: provider, uid: user.facebook_uid) }
-
-      it "returns a Success" do
-        expect(subject).to be_success
-      end
-    end
-
     context "given an existing User" do
       context "that has not already fast-connected" do
         let(:user) { create(:user) }

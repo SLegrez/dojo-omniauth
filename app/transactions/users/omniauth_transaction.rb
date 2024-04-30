@@ -9,7 +9,7 @@ class Users::OmniauthTransaction < ApplicationTransaction
   end
 
   def update_existing_user(input)
-    @existing_user = User.find_by(email: @auth.info.email)
+    @existing_user = User.find_by(email: @auth.info.email, "#{@provider}_uid": @auth.uid)
     return Success(input) if !@existing_user.present?
 
     @existing_user.assign_attributes("#{@provider}_uid": @auth.uid)
