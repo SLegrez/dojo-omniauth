@@ -47,6 +47,23 @@ RSpec.describe Users::OmniauthCallbacksController, type: :request do
         end
       end
 
+      context "given the service fails because a user already exists" do
+        before do
+          expect(Users::OmniauthTransaction).to receive(:call).exactly(1).times do
+            Dry::Monads::Failure.new(existing_user: user)
+          end
+        end
+
+        it "signs me in" do
+          subject
+          expect(controller.current_user).to eq(user)
+        end
+
+        it "redirects to root_path" do
+          expect(subject).to redirect_to(root_path)
+        end
+      end
+
       context "given the service fails because the facebook auth failed" do
         before do
           expect(Users::OmniauthTransaction).to receive(:call).exactly(1).times do
@@ -107,7 +124,24 @@ RSpec.describe Users::OmniauthCallbacksController, type: :request do
         end
       end
 
-      context "given the service fails because the facebook auth failed" do
+      context "given the service fails because a user already exists" do
+        before do
+          expect(Users::OmniauthTransaction).to receive(:call).exactly(1).times do
+            Dry::Monads::Failure.new(existing_user: user)
+          end
+        end
+
+        it "signs me in" do
+          subject
+          expect(controller.current_user).to eq(user)
+        end
+
+        it "redirects to root_path" do
+          expect(subject).to redirect_to(root_path)
+        end
+      end
+
+      context "given the service fails because the google auth failed" do
         before do
           expect(Users::OmniauthTransaction).to receive(:call).exactly(1).times do
             Dry::Monads::Failure.new(error: "error")
@@ -167,6 +201,23 @@ RSpec.describe Users::OmniauthCallbacksController, type: :request do
         end
       end
 
+      context "given the service fails because a user already exists" do
+        before do
+          expect(Users::OmniauthTransaction).to receive(:call).exactly(1).times do
+            Dry::Monads::Failure.new(existing_user: user)
+          end
+        end
+
+        it "signs me in" do
+          subject
+          expect(controller.current_user).to eq(user)
+        end
+
+        it "redirects to root_path" do
+          expect(subject).to redirect_to(root_path)
+        end
+      end
+
       context "given the service fails because the linkedin auth failed" do
         before do
           expect(Users::OmniauthTransaction).to receive(:call).exactly(1).times do
@@ -180,6 +231,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :request do
       end
     end
   end
+
   describe "#github" do
     let(:user) { create(:user, github_uid: "1234") }
 
@@ -214,6 +266,23 @@ RSpec.describe Users::OmniauthCallbacksController, type: :request do
               }
             }
           }).and_return(Dry::Monads::Success.new(user: user)))
+        end
+
+        it "signs me in" do
+          subject
+          expect(controller.current_user).to eq(user)
+        end
+
+        it "redirects to root_path" do
+          expect(subject).to redirect_to(root_path)
+        end
+      end
+
+      context "given the service fails because a user already exists" do
+        before do
+          expect(Users::OmniauthTransaction).to receive(:call).exactly(1).times do
+            Dry::Monads::Failure.new(existing_user: user)
+          end
         end
 
         it "signs me in" do

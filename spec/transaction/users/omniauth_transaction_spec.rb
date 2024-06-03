@@ -4,6 +4,16 @@ RSpec.describe Users::OmniauthTransaction, type: :transaction do
   subject { described_class.call(auth: auth, provider: provider) }
 
   describe ".call" do
+    context "given an existing User that already fast-connected" do
+      let(:user) { create(:user, facebook_uid: "1234") }
+      let(:provider) { "facebook" }
+      let(:auth) { OmniAuth::AuthHash.new(info: { email: user.email }, provider: provider, uid: user.facebook_uid) }
+
+      it "returns a Failure" do
+        expect(subject).to be_failure
+      end
+    end
+
     context "given an existing User" do
       context "that has not already fast-connected" do
         let(:user) { create(:user) }
@@ -30,8 +40,8 @@ RSpec.describe Users::OmniauthTransaction, type: :transaction do
           let(:provider) { "facebook" }
           let(:auth) { OmniAuth::AuthHash.new(info: { email: user.email }, provider: provider, uid: "1234") }
 
-          it "returns a Success" do
-            expect(subject).to be_success
+          it "returns a Failure" do
+            expect(subject).to be_failure
           end
 
           it "does not update the User" do
@@ -69,7 +79,8 @@ RSpec.describe Users::OmniauthTransaction, type: :transaction do
           first_name: user.first_name,
           last_name: user.last_name
         },
-        provider: provider
+        provider: provider,
+        uid: user.google_uid
       )}
 
       it "creates a new User in database" do

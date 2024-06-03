@@ -1,5 +1,6 @@
 class Users::OmniauthTransaction < ApplicationTransaction
   tee :params
+  step :existing_fast_connected_user
   step :update_existing_user
   step :find_or_create_user
 
@@ -8,15 +9,25 @@ class Users::OmniauthTransaction < ApplicationTransaction
     @provider = input.fetch(:provider)
   end
 
+  def existing_fast_connected_user(input)
+    existing_user = User.from_omniauth(@auth, @provider)
+
+    if existing_user
+      Failure(input.merge(existing_user: existing_user))
+    else
+      Success(input)
+    end
+  end
+
   def update_existing_user(input)
-    @existing_user = User.find_by(email: @auth.info.email, "#{@provider}_uid": @auth.uid)
+    @existing_user = User.find_by(email: @auth.info.email)
     return Success(input) if !@existing_user.present?
 
     @existing_user.assign_attributes("#{@provider}_uid": @auth.uid)
     if @existing_user.save
       Success(input)
     else
-      Failure(input.merge(error: user.errors.full_messages.join("\n")))
+      Failure(input.merge(error: @existing_user.errors.full_messages.join("\n")))
     end
   end
 
